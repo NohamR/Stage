@@ -64,39 +64,6 @@ def position(fposition, newv):
 
 xxold = xxbase.copy()
 
-# while(t<tf):
-#     plt.figure(1,figsize=[16,9])
-#     plt.clf()
-
-#     nb = 360
-
-#     r=np.linspace(1,1,nb)
-#     theta=np.linspace(0,2*np.pi,nb)
-
-#     plt.polar(theta, r)
-#     # plt.scatter(1*np.pi, 0.5)
-
-#     dst = distances(xxold)
-#     statusc = status(dst)
-#     print(statusc)
-
-#     vt = phi(dst)
-#     # print('vitesses : ', vt)
-
-#     xx = position(xxold, vt)
-#     # print('position : ', xx)
-
-#     plt.scatter(xx/10*np.pi, y, c=colors)
-
-#     for i in range(len(xx)):
-#         plt.plot(xx[i]/10*np.pi, y[i], color=statusc[i])
-
-#     plt.title('Vitesse maximale : ' + str(U) + 'm.s-¹\ndistance minimale entre deux voitures : ' + str(Wm) + 'm\nnombre de voitures : ' + str(nbv))
-#     plt.draw()
-#     plt.pause(0.00001)
-#     t += dt
-#     xxold = xx.copy()
-
 while(t < tf):
     plt.figure(1, figsize=[16, 9])
     plt.clf()
@@ -109,6 +76,8 @@ while(t < tf):
 
     dst = distances(xxold)
     statusc = status(dst)
+    print(dst)
+    print(statusc)
 
     vt = phi(dst)
     xx = position(xxold, vt)
