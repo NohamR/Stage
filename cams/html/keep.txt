@@ -1,0 +1,12 @@
+http://203.106.109.141:8081/cgi-bin/viewer/video.jpg?r=COUNTER
+http://175.138.229.49:8082/cgi-bin/viewer/video.jpg?r=COUNTER
+http://175.139.217.149:8081/cgi-bin/viewer/video.jpg?r=COUNTER
+http://111.70.20.27/cgi-bin/viewer/video.jpg?r=COUNTER
+http://86.121.159.16/cgi-bin/faststream.jpg?stream=half&fps=15&rand=COUNTER
+http://166.139.118.183:8081/webcapture.jpg?command=snap&channel=1?COUNTER
+http://142.154.137.29/mjpg/video.mjpg
+http://166.154.166.8/mjpg/video.mjpg
+http://83.91.176.170/mjpg/video.mjpg
+http://64.91.25.240:82/mjpg/video.mjpg
+http://50.252.187.218/mjpg/video.mjpg
+http://118.22.23.185/SnapshotJPEG?Resolution=640x480&amp;Quality=Clarity&amp;COUNTER

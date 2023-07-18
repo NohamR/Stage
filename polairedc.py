@@ -4,7 +4,7 @@ import time
 from colour import Color
 
 t0 = 0
-tf = 100
+tf = 200
 dt = 0.5
 t = t0
 
@@ -84,8 +84,8 @@ while(t < tf):
 
     plt.scatter(xx/10 * np.pi, y, c=colors)
 
-    for i in range(len(xx)-1):
-        plt.plot([xx[i]/10 * np.pi, xx[i+1]/10 * np.pi], [y[i], y[i+1]], color=statusc[i])
+    # for i in range(len(xx)-1):
+    #     plt.plot([xx[i]/10 * np.pi, xx[i+1]/10 * np.pi], [y[i], y[i+1]], color=statusc[i])
 
     plt.title('Vitesse maximale : ' + str(U) + ' m/s\ndistance minimale entre deux voitures : ' + str(Wm) + ' m\nnombre de voitures : ' + str(nbv))
     plt.draw()
