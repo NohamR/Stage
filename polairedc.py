@@ -2,13 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from colour import Color
+import random
 
 t0 = 0
 tf = 200
 dt = 0.5
 t = t0
 
-nbv = 20
+nbv = 30
 
 def rainbow_gradient(num_colors):
     colors = []
@@ -19,26 +20,6 @@ def rainbow_gradient(num_colors):
         colors.append(hex_code)
     return colors
 colors = rainbow_gradient(nbv)
-
-def status(distances):
-    num_colors = len(distances)
-    colors = []
-    base_color = Color("green")
-    target_color = Color("red")
-    luminance_start = base_color.get_luminance()
-    luminance_end = target_color.get_luminance()
-    for i in range(num_colors):
-        moydist = distances[i]
-        t = i / (num_colors - 1)
-        adjusted_luminance = luminance_start + (luminance_end - luminance_start) * (1 - t) * (moydist - 1) / 18
-        color = Color(rgb=(base_color.rgb[0] * (1 - t) + target_color.rgb[0] * t,
-                           base_color.rgb[1] * (1 - t) + target_color.rgb[1] * t,
-                           base_color.rgb[2] * (1 - t) + target_color.rgb[2] * t))
-        color.set_luminance(adjusted_luminance)
-        hex_code = color.hex_l
-        colors.append(hex_code)
-    return colors
-
 
 U = 1.25 # vitesse m.s-¹
 Wm = 0.3 # distance minimale entre la voiture et celle qui la précède m
@@ -51,10 +32,14 @@ def phi(ww): # prend en entrée la distance entre les deux véhicules
 y = np.linspace(1, 1, nbv)
 xxbase = np.linspace(0, 1, nbv)
 
+arr = random.randint(0,nbv-1)
+
 def distances(fposition):
     # print('fposition', fposition)
     dist = np.diff(fposition)
     inter = fposition[0]+20-fposition[-1]
+    if (t>= 50) and (t<=60) :
+        dist[arr] = 0
     newdist = np.insert(dist, len(dist), inter)
     return newdist
 
@@ -75,19 +60,12 @@ while(t < tf):
     plt.polar(theta, r, alpha=0)
 
     dst = distances(xxold)
-    statusc = status(dst)
-    print(dst)
-    print(statusc)
-
     vt = phi(dst)
     xx = position(xxold, vt)
 
     plt.scatter(xx/10 * np.pi, y, c=colors)
 
-    # for i in range(len(xx)-1):
-    #     plt.plot([xx[i]/10 * np.pi, xx[i+1]/10 * np.pi], [y[i], y[i+1]], color=statusc[i])
-
-    plt.title('Vitesse maximale : ' + str(U) + ' m/s\ndistance minimale entre deux voitures : ' + str(Wm) + ' m\nnombre de voitures : ' + str(nbv))
+    plt.title('Vitesse maximale : ' + str(U) + ' m/s\ndistance minimale entre deux voitures : ' + str(Wm) + ' m\nnombre de voitures : ' + str(nbv) + '\n temps : ' + str(t)+ '\n la voiture qui va freiner est la ' + str(arr) + ' ème (à 50s)')
     plt.draw()
     plt.pause(0.00001)
     t += dt
