@@ -53,7 +53,6 @@ while(t<tf):
     xx = position(xxold, vt)
     # color = ['#ff0000', '#ff5300', '#ffa500', '#ffd200', '#ffff00', '#80c000', '#008000', '#004080', '#0000ff', '#2600c1', '#4b0082']
     plt.scatter(xx, vt)
-    print(xx)
     plt.scatter(xx, y, c=colors)
     plt.plot([0,20],[1.25, 1.25], color='k', linestyle='-', linewidth=1)
     plt.xlabel('distance w  en m')

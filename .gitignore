@@ -1,3 +1,5 @@
 *.avi
 .vscode
 .DS_Store
+__pycache__
+gipps/result
