@@ -10,7 +10,7 @@ objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 # images = glob.glob('detec/foscam/*.png')
-images = glob.glob('detec/foscam/*.jpg')
+images = glob.glob('detec/data/*.jpg')
 
 
 for fname in images:
@@ -32,6 +32,6 @@ for fname in images:
 ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 
 
-img = cv.imread('detec/foscam/1.jpg')
+img = cv.imread('detec/data/1.jpg')
 h, w = img.shape[:2]
 newcameramtx, roi = cv.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
