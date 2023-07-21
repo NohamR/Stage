@@ -34,7 +34,7 @@ def detrf(folder_path):
     except OSError as e:
         print(f"Error deleting folder: {e}")
 
-def merge(fps):
+def merge():
     overlay_folder = "gipps/result"
     output_path = "gipps/merged.png"
     merge_images(overlay_folder, output_path)

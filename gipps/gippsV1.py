@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import time
 from colour import Color
 import imagesV1 as images
+import imagesV2 as images2
+
+fps = 4
 
 # ===========
 t0 = 0
@@ -43,7 +46,7 @@ def rainbow_gradient(num_colors):
 colors = rainbow_gradient(nbv)
 
 def px(tt):             # Avance au cours du temps
-    tt += 1
+    tt += 1/fps
     return tt
 
 def vitesseatt(vtold):       # Vitesse qu'il peut réellement atteindre d'un point de vue dynamique
@@ -59,7 +62,7 @@ def vitesseadop(vtold, xxpold):      # Vitesse qu'il est possible d'adopter en c
     return newvalue
 
 def vitessereelle(t, vtold, xxpold):    # Vitesse du véhicule
-    t+=t
+    # t+=t
     if t==0:
         vtold[-1] = 0.1
     elif (t> 0) and (t<=10):     # Accélération du leader
@@ -70,7 +73,7 @@ def vitessereelle(t, vtold, xxpold):    # Vitesse du véhicule
         a = - (Vd - Vmin) / 10
         vtleader = Vd + 2 * a * (t - 16)
         vtold[-1] = vtleader
-    elif (t>= 20) and (t<=30):  # Accélération du leader
+    elif (t> 20) and (t<=30):  # Accélération du leader
         a = (Vd - Vmin) / 10
         vtleader = Vmin + a * (t-20)
         vtold[-1] = vtleader
@@ -116,11 +119,12 @@ while(t<tf):
     plt.ylabel('vitesse en m.s-¹')
     plt.title('Vitesse maximale désirée\nvitesse du leader : ' + str(Vd) + 'm.s-¹\ndistance entre deux voitures : ' + str(np.diff(xxpold)) + 'm\n\nTemps : ' + str(t))
     plt.draw()
-    plt.savefig('gipps/result/' + str(t)+'.png', transparent=True)
-    plt.pause(0.1)
-    t += dt/4
+    plt.savefig('gipps/result/' + str(int(t * fps)) + '.png', transparent=True)
+    # plt.pause(0.1)
+    t += dt/fps
     xxold = xx.copy()
     xxpold = xxp.copy()
     vtold = vt.copy()
 
-images.merge()
+# images.merge()
+images2.merge(fps)

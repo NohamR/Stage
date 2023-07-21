@@ -4,7 +4,7 @@ import time
 from colour import Color
 import imagesV2 as images
 
-fps = 4
+fps = 1
 
 # ===========
 t0 = 0
@@ -120,8 +120,8 @@ while(t<tf):
     plt.ylabel('vitesse en m.s-¹')
     plt.title('Vitesse maximale désirée\nvitesse du leader : ' + str(Vd) + 'm.s-¹\ndistance entre deux voitures : ' + str(np.diff(xxpold)) + 'm\n\nTemps : ' + str(t))
     plt.draw()
-    plt.savefig('gipps/result/' + str(int(t * fps))+'.png', transparent=True)
-    # plt.pause(0.1)
+    plt.savefig('gipps/result/' + str(int(t * fps)) +'.png', transparent=True)
+    plt.pause(0.1)
     t += dt/fps
     xxold = xx.copy()
     xxpold = xxp.copy()
