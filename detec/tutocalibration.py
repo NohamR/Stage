@@ -10,7 +10,7 @@ objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 # images = glob.glob('detec/foscam/*.png')
-images = glob.glob('detec/data/*.jpg')
+images = glob.glob('detec/foscam/*.jpg')
 
 
 for fname in images:
@@ -27,11 +27,19 @@ for fname in images:
         cv.drawChessboardCorners(img, (7,6), corners2, ret)
         cv.imshow('img', img)
         cv.waitKey(500)
-        cv.destroyAllWindows()
+        # cv.destroyAllWindows()
 
 ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 
+for i in range(1,12):
+    img = cv.imread(f'detec/foscam/{i}.jpg')
+    h, w = img.shape[:2]
+    newcameramtx, roi = cv.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
 
-img = cv.imread('detec/data/1.jpg')
-h, w = img.shape[:2]
-newcameramtx, roi = cv.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
+
+    # undistort
+    dst = cv.undistort(img, mtx, dist, None, newcameramtx)
+    # crop the image
+    x, y, w, h = roi
+    dst = dst[y:y+h, x:x+w]
+    cv.imwrite(f'calibresult{i}.png', dst)
