@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import time
 
-cap = cv2.VideoCapture('cams/10s.mp4')
+cap = cv2.VideoCapture('cams/2/10s.mp4')
 folder_path = "track/exp2/labels/"
 name = '10s'
 fps = 141
@@ -41,6 +41,11 @@ while(cap.isOpened()):
             bottom_right_y = int(center_y + bbox_height / 2)
 
             cv2.rectangle(frame, (top_left_x, top_left_y), (bottom_right_x, bottom_right_y), (255, 0, 0), 2)
+
+            # print('bottom_right_y: ', bottom_right_y)
+            # print('bottom_right_x: ', bottom_right_x)
+            # print('top_left_y: ', top_left_y)
+            # print('top_left_x: ', top_left_x)
             
             label = f'Class: {int(class_id)}, Object ID: {int(object_id)}'
             cv2.putText(frame, label, (top_left_x, top_left_y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)

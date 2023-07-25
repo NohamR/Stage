@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import time
 
-cap = cv2.VideoCapture('cams/new/cut1.mp4')
+cap = cv2.VideoCapture('cams/new/ByED80IKdIU_06.mp4')
 folder_path = "cams/new/frames"
 
 frame_nb = 0
