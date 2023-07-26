@@ -1,0 +1,1 @@
+python3 examples/track.py --tracking-method strongsort --save --source /Users/noham/Documents/GitHub/Stage/cams/new/cut2.mp4  --imgsz 4000 2000 --classes 2 --save-txt

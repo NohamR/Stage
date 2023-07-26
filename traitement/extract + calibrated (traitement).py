@@ -3,17 +3,23 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from scipy.optimize import least_squares
-from imageio import imread
+import os
+# from imageio import imread
 import cameratransform as ct
 
 cap = cv2.VideoCapture('cams/new/cut2.mp4')
-folder_path = "traitement/expgood/labels/"
+folder_path = "traitement/delrp/labels/"
 name = 'cut2'
 fps = 780
 
 allfiles = []
 for i in range(1, fps+1):
     allfiles.append(folder_path + name + '_' + str(i) + '.txt')
+
+try:
+    os.remove('traitement/distance.txt')
+except:
+    pass
 
 # Set the desired dimensions for displaying the video
 display_width = 1280
@@ -101,30 +107,31 @@ while cap.isOpened():
         Yv = a
 
         BH = ((space_pts[:,0] - Xb) * Xv) + ((space_pts[:,1] - Yb) * Yv) / np.sqrt( (Xv**2) + (Yv ** 2) )
-        
-        with open("traitement/distance.txt", 'a', encoding='utf-8') as file:
-                file.write('\n' + str(BH))
+        # print(BH.tolist())
+        with open("traitement/distance_delrp.txt", 'a', encoding='utf-8') as file:
+                file.write('\n' + str(BH.tolist()))
 
         # resized_frame = cv2.resize(frame, (display_width, display_height))
         # cv2.imshow('Frame', resized_frame)
         # plt.figure()
 
 #######################
-        plt.scatter(space_pts[:,0], space_pts[:,1], color="red", s=2)
-        # plt.plot([28.569, 51.681],[26.665, 89.904], color='blue', linestyle='-', linewidth=1)
+        # plt.figure(1, figsize=[16, 9])
+        # plt.scatter(space_pts[:,0], space_pts[:,1], color="red", s=2)
+        # # plt.plot([28.569, 51.681],[26.665, 89.904], color='blue', linestyle='-', linewidth=1)
         
-        plt.plot(x, y, label=f"y = {a}x + {b}", color="black")
+        # plt.plot(x, y, label=f"y = {a}x + {b}", color="black")
 
-        plt.scatter(Xb, Yb, color="black", s=20)
-        plt.title(frame_nb)
-        plt.legend()
+        # plt.scatter(Xb, Yb, color="black", s=20)
+        # plt.title(frame_nb)
+        # plt.legend()
 
-        # plt.axis("equal")
-        plt.xlim([0, 100])
-        plt.ylim([0, 150])
-        plt.draw()
-        plt.pause(0.0000000000001)
-        plt.clf()
+        # # plt.axis("equal")
+        # plt.xlim([0, 100])
+        # plt.ylim([0, 150])
+        # plt.draw()
+        # plt.pause(0.0000000000001)
+        # plt.clf()
 ######################
 
         if cv2.waitKey(25) & 0xFF == ord('q'):break
