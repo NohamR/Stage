@@ -1,8 +1,6 @@
-import os
 import pandas as pd
 import numpy as np
 import cv2
-import time
 
 cap = cv2.VideoCapture('cams/new/cut2.mp4')
 folder_path = "track/expgood/labels/"
@@ -39,8 +37,6 @@ while cap.isOpened():
         for index, row in df.iterrows():
             class_id, center_x, center_y, bbox_width, bbox_height, object_id = row
 
-
-
             center_x = int(center_x * width)
             center_y = int(center_y * height)
             bbox_width = int(bbox_width * width)
@@ -53,15 +49,25 @@ while cap.isOpened():
 
             # (19;112) à (636;714) et (86;86) à (1087;715)
             if (((112-714)/(19-636)) * top_left_x + 112 - ((112-714)/(19-636)) *19 > top_left_y ) and (((86-715)/(86-1097)) * bottom_right_x + 112 - ((86-715)/(86-1097)) *86 < bottom_right_y ):
-                cv2.rectangle(frame, (top_left_x, top_left_y), (bottom_right_x, bottom_right_y), vert, 2)
+                
+                # cv2.rectangle(frame, (top_left_x, top_left_y), (bottom_right_x, bottom_right_y), vert, 2)
 
                 label = f'Class: {int(class_id)}, Object ID: {int(object_id)}'
                 cv2.putText(frame, label, (top_left_x, top_left_y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, vert, 1)
-            else : 
-                cv2.rectangle(frame, (top_left_x, top_left_y), (bottom_right_x, bottom_right_y), bleu, 2)
 
-                label = f'Class: {int(class_id)}, Object ID: {int(object_id)}'
-                cv2.putText(frame, label, (top_left_x, top_left_y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, bleu, 1)
+                # obetnir le centre du rectangle
+                center_x = (top_left_x + bottom_right_x) // 2
+                center_y = (top_left_y + bottom_right_y) // 2
+                cv2.circle(frame, (center_x, center_y), 5, vert, -1)
+
+
+
+            else :
+                pass
+                # cv2.rectangle(frame, (top_left_x, top_left_y), (bottom_right_x, bottom_right_y), bleu, 2)
+
+                # label = f'Class: {int(class_id)}, Object ID: {int(object_id)}'
+                # cv2.putText(frame, label, (top_left_x, top_left_y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, bleu, 1)
 
         resized_frame = cv2.resize(frame, (display_width, display_height))
 
