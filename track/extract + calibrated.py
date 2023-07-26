@@ -30,6 +30,11 @@ frame_nb = 0
 bleu = (255, 0, 0)
 vert = (0, 255, 0)
 
+a = 2.736
+b = -51.49521
+x = [i for i in range(-10000, 100000)]
+y = [a * xi + b for xi in x]
+
 # # Cam part
 # img = cv2.imread("track/Sylvain/stage_Noham/stage_Noham/image_vide_pts.png")
 # nh,nw,_ = img.shape
@@ -47,7 +52,7 @@ while cap.isOpened():
     ret, frame = cap.read()
     if ret:
         df = pd.read_csv(allfiles[frame_nb], header=None, sep=' ')
-        ind_px_ground_pts = []
+        px_ground_pts = []
         for index, row in df.iterrows():
             class_id, center_x, center_y, bbox_width, bbox_height, object_id = row
 
@@ -72,20 +77,33 @@ while cap.isOpened():
                 center_y = (top_left_y + bottom_right_y) // 2
                 cv2.circle(frame, (center_x, center_y), 5, vert, -1)
                 
-                ind_px_ground_pts += [center_x, center_y]
+                px_ground_pts += [[center_x, center_y]]
                 
 
             else :
                 pass
-        ind_px_ground_pts = np.array(ind_px_ground_pts)
-        print('ind_px_ground_pts: ', len(ind_px_ground_pts))
 
-        px_ground_pts = np.vstack([ind_px_ground_pts[1],ind_px_ground_pts[0]]).T
+        # print('px_ground_pts: ', px_ground_pts)
+        # print('np.arraypx_ground_pts: ', np.array(px_ground_pts))
+         
 
         space_pts = []
-        for pt in px_ground_pts:
+        for pt in np.array(px_ground_pts):
             space_pts.append(cam.spaceFromImage(pt))
         space_pts = np.array(space_pts)
+
+        # print('space_pts: ', space_pts)
+
+        Xb = 26
+        Yb = a * Xb + b
+
+        Xv = 1
+        Yv = a
+
+        BH = ((space_pts[:,0] - Xb) * Xv) + ((space_pts[:,1] - Yb) * Yv) / np.sqrt( (Xv**2) + (Yv ** 2) )
+        
+        with open("track/distance.txt", 'a', encoding='utf-8') as file:
+                file.write('\n' + str(BH))
 
         # resized_frame = cv2.resize(frame, (display_width, display_height))
         # cv2.imshow('Frame', resized_frame)
@@ -93,7 +111,12 @@ while cap.isOpened():
 
 #######################
         plt.scatter(space_pts[:,0], space_pts[:,1], color="red", s=2)
-        plt.plot([28.569, 51.681],[26.665, 89.904], color='blue', linestyle='-', linewidth=1)
+        # plt.plot([28.569, 51.681],[26.665, 89.904], color='blue', linestyle='-', linewidth=1)
+        
+        plt.plot(x, y, label=f"y = {a}x + {b}", color="black")
+
+        plt.scatter(Xb, Yb, color="black", s=20)
+
         # plt.axis("equal")
         plt.xlim([0, 100])
         plt.ylim([0, 150])

@@ -18,7 +18,7 @@ mask = (img[:,:,0]==0)*(img[:,:,1]==0)*(img[:,:,2]==255)
 ind_px_ground_pts = np.where(mask)
 print('ind_px_ground_pts: ', ind_px_ground_pts)
 px_ground_pts = np.vstack([ind_px_ground_pts[1],ind_px_ground_pts[0]]).T
-print(px_ground_pts)
+print('px_ground_pts: ', px_ground_pts)
 
 
 
