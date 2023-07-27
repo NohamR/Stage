@@ -8,7 +8,7 @@ import os
 import cameratransform as ct
 
 cap = cv2.VideoCapture('cams/new/cut2.mp4')
-folder_path = "traitement/delrp/labels/"
+folder_path = "traitement/expgood/labels/"
 name = 'cut2'
 fps = 780
 
@@ -108,7 +108,7 @@ while cap.isOpened():
 
         BH = ((space_pts[:,0] - Xb) * Xv) + ((space_pts[:,1] - Yb) * Yv) / np.sqrt( (Xv**2) + (Yv ** 2) )
         # print(BH.tolist())
-        with open("traitement/distance_delrp.txt", 'a', encoding='utf-8') as file:
+        with open("traitement/distance.txt", 'a', encoding='utf-8') as file:
                 file.write('\n' + str(BH.tolist()))
 
         # resized_frame = cv2.resize(frame, (display_width, display_height))

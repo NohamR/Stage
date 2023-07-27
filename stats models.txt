@@ -1,0 +1,18 @@
+strongsort base : 2676 (10032)
+deepocsort base : 2229 (9015)
+ocsort base : 2551 (9771)
+bytetrack base : 1799 (6800) #5
+botsort base : 2541 (9741)
+
+botsort + yolov8n : pareil
+
+all : prend que le dernier argument
+
+STRONGSORT :
+t1 : 2666 (10004)		conf_thres: 0.4
+t2 : 2666 (10004)		conf_thres: 0.2
+retour base : 2670 (10008)
+4500x2500 : 2651 (9985)
+res base : 2118 (5493) #14
+
+1280x2272 : 2630 (9986)

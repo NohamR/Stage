@@ -10,26 +10,38 @@ def rainbow_gradient(num_colors):
         colors.append(hex_code)
     return colors
 
-
+framenb = 1
 coordonnees_xb = []
-with open('traitement/distance_delrp.txt', 'r') as f:
+with open('traitement/distance.txt', 'r') as f:
     lignes = f.readlines()
     for ligne in lignes:
         line = eval(ligne)
+        line = sorted(line)
 
-        lenline = len(line)
-        colors = rainbow_gradient(lenline)
+        for element in line:
+                if element < 0:
+                    line.remove(element)
         
+        if len(line) >= 4 :
 
-        plt.figure(1,figsize=[16,9])
-        plt.xlim([-1,150])
-        plt.ylim([-0.5, 5])
+            lendeline = len(line)
+            
+            while lendeline > 4:
+                trop = line.pop()
+                lendeline = len(line)
 
-        nb = 0
-        for pos in line:
-            plt.plot([0,pos],[nb, nb], marker='o', linestyle='-', color=colors[nb])
-            nb += 1
+            plt.figure(1,figsize=[16,9])
+            plt.xlim([-1,150])
+            plt.ylim([-0.5, 5])
 
-        plt.draw()
-        plt.pause(0.0001)
-        plt.clf()
+            colors = rainbow_gradient(len(line))
+            nb = 0
+            for pos in line:
+                plt.plot([0,pos],[nb, nb], marker='o', linestyle='-', color=colors[nb])
+                nb += 1
+
+            plt.draw()
+            plt.pause(0.0001)
+            plt.savefig(f'traitement/vidresult/{framenb}.png')
+            framenb += 1
+            plt.clf()

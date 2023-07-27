@@ -60,6 +60,6 @@ while(t<tf):
     plt.title('Evolution de la vitesse des voitures\nvitesse du leader : ' + str(U) + 'm.s-¹\ndistance minimale entre deux voitures : ' + str(Wm) + 'm')
     plt.draw()
     # plt.savefig(str(t)+'.png')
-    plt.pause(0.00001)
+    plt.pause(0.2)
     t += dt
     xxold = xx.copy()
