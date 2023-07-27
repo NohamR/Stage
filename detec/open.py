@@ -4,17 +4,17 @@ import numpy as np
 import cv2
 import time
 
-cap = cv2.VideoCapture('cams/2/10s.mp4')
-folder_path = "track/exp2/labels/"
-name = '10s'
-fps = 141
+cap = cv2.VideoCapture('cams/new/cut2.mp4')
+folder_path = "track/expgood/labels/"
+name = 'cut2'
+fps = 780
 
 allfiles = []
 for i in range(1,fps+1):
     allfiles.append(folder_path + name + '_' + str(i) + '.txt')
 
-width = 480
-height = 360
+width = 1920
+height = 1080
 
 frame_nb = 0
 

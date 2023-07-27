@@ -40,6 +40,6 @@ while(t<tf):
     plt.scatter(xx, y, c=color)
     plt.draw()
     # plt.savefig(str(t)+'.png')
-    plt.pause(0.1)    
+    plt.pause(0.2)    
     t += dt
     xxold = xx.copy()
