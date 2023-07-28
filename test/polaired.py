@@ -5,7 +5,7 @@ from colour import Color
 
 t0 = 0
 tf = 100
-dt = 0.5
+dt = 0.25
 t = t0
 
 nbv = 20
@@ -45,12 +45,17 @@ def position(fposition, newv):
 xxold = xxbase.copy()
 
 while(t < tf):
-    plt.figure(1, figsize=[16, 9])
+    plt.figure(1, figsize=[12, 16])
     plt.clf()
 
     nb = 360
     r = np.linspace(1, 1, nb)
     theta = np.linspace(0, 2 * np.pi, nb)
+
+    ax = plt.subplot(111, polar=True)
+
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
 
     plt.polar(theta, r, alpha=0)
 
@@ -61,8 +66,12 @@ while(t < tf):
 
     plt.scatter(xx/10 * np.pi, y, c=colors)
 
-    plt.title('Vitesse maximale : ' + str(U) + ' m/s\ndistance minimale entre deux voitures : ' + str(Wm) + ' m\nnombre de voitures : ' + str(nbv))
+    # plt.title("Modélisation de l'évolution de la distance entre les voitures (périodique)\n\nnombre de voiture : "+ str(nbv) +"\n\nau temps t = " + str(t) + 's\n')
+    plt.grid(False)
+
     plt.draw()
+    plt.savefig('test/polaired_nbv=20/frame_' + str(t)+'.png')
     plt.pause(0.00001)
     t += dt
+
     xxold = xx.copy()

@@ -31,15 +31,27 @@ def position(fposition):
 
 xxold = xxbase.copy()
 
-while(t<tf):
-    plt.figure(1,figsize=[16,9])
-    plt.clf()
-    plt.xlim([-1,10])
+while(t<=tf):
+    plt.figure(1,figsize=[12,5])
+    # plt.clf()
+    plt.xlim([-1,30])
+    plt.ylim([-1, 21])
     xx = position(xxold)
     color = ['#ff0000', '#ff5300', '#ffa500', '#ffd200', '#ffff00', '#80c000', '#008000', '#004080', '#0000ff', '#2600c1', '#4b0082']
-    plt.scatter(xx, y, c=color)
+
+    # plt.plot([0,20],[t, t], color='k', linestyle='-', linewidth=1)
+
+    plt.scatter(xx, np.linspace(t, t, 11), c=color)
+
+    
+    plt.xlabel('distance w  en m', )
+    plt.ylabel('temps en s')
+    # plt.title("Modélisation de l'évolution de la distance entre les voitures\n\nau temps t = " + str(t) + 's')
+
+
     plt.draw()
-    # plt.savefig(str(t)+'.png')
+    if t == 20:
+        plt.savefig('test/model/frame_' + str(t)+'.png')
     plt.pause(0.2)    
     t += dt
     xxold = xx.copy()

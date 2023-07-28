@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-vt = 1.25  # 4,5 km/h
+# vt = 1.25  # 4,5 km/h
 Umin = 1  # vitesse m/s
 Umax = 36  # environ 130 km/h
 Wm = 4.23  # longueur du véhicule en m (moyenne française)
@@ -11,7 +11,7 @@ t = np.linspace(0, 15, 400)
 def vitesse(t):
     a = np.where(t <= 10, (Umax - Umin) / 10, - (Umax - Umin) / 10)
     vt = np.where(t <= 10, Umin + a * t, Umax + 2 * a * (t - 10))
-    print('vt: ', vt)
+    # print('vt: ', vt)
     return vt
 
 
