@@ -8,7 +8,7 @@ tf = 100
 dt = 0.25
 t = t0
 
-nbv = 20
+nbv = 30
 
 def rainbow_gradient(num_colors):
     colors = []
@@ -45,7 +45,7 @@ def position(fposition, newv):
 xxold = xxbase.copy()
 
 while(t < tf):
-    plt.figure(1, figsize=[12, 16])
+    plt.figure(1, figsize=[11, 11])
     plt.clf()
 
     nb = 360
@@ -70,8 +70,8 @@ while(t < tf):
     plt.grid(False)
 
     plt.draw()
-    plt.savefig('test/polaired_nbv=20/frame_' + str(t)+'.png')
-    plt.pause(0.00001)
+    plt.savefig('test/polaired_nbv=30/frame_' + str(t)+'.png')
+    plt.pause(0.1)
     t += dt
 
     xxold = xx.copy()

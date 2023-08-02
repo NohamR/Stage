@@ -11,9 +11,10 @@ def phi(ww):
     return (ww >= Wm)* PHI
 
 plt.figure(figsize=[16,9])
-plt.xlabel('distance w  en m')
-plt.ylabel('vitesse en m.s-¹')
+plt.xlabel('distance w  en m', fontsize = 16)
+plt.ylabel('vitesse en m.s-¹', fontsize = 16)
+plt.tick_params(labelsize = 14)
 plt.plot(ww, phi(ww))
 plt.savefig('test/phi(ww).png')
 plt.draw()  
-plt.pause(10)
+plt.pause(0.1)

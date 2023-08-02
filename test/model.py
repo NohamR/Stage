@@ -36,6 +36,10 @@ while(t<=tf):
     # plt.clf()
     plt.xlim([-1,30])
     plt.ylim([-1, 21])
+    plt.tick_params(labelsize = 14)
+
+
+
     xx = position(xxold)
     color = ['#ff0000', '#ff5300', '#ffa500', '#ffd200', '#ffff00', '#80c000', '#008000', '#004080', '#0000ff', '#2600c1', '#4b0082']
 
@@ -44,8 +48,10 @@ while(t<=tf):
     plt.scatter(xx, np.linspace(t, t, 11), c=color)
 
     
-    plt.xlabel('distance w  en m', )
-    plt.ylabel('temps en s')
+    plt.xlabel('distance w  en m', fontsize = 16)
+    plt.ylabel('temps en s', fontsize = 16)
+    plt.tick_params(labelsize = 14)
+    plt.yticks([0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20])
     # plt.title("Modélisation de l'évolution de la distance entre les voitures\n\nau temps t = " + str(t) + 's')
 
 
