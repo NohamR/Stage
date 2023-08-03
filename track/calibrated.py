@@ -5,7 +5,7 @@ from scipy.optimize import least_squares
 from imageio import imread
 import cameratransform as ct
 
-img = cv2.imread("track/Sylvain/stage_Noham/stage_Noham/image_vide_pts.png")
+img = cv2.imread("track/Sylvain/stage_Noham/image_vide_pts.png")
 nh,nw,_ = img.shape
 
 res = np.array([ 3.99594676,  3.53413555,  4.55      , 16.41739973, 74.96395791, 49.11271189,  2.79384615])

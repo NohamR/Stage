@@ -15,12 +15,12 @@ from imageio import imread
 from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
 from shapely.geometry import Point
 import geopandas as gpd
-import cartopy
-import cartopy.crs as ccrs
+# import cartopy
+# import cartopy.crs as ccrs
 import cameratransform as ct
 import geodatasets
 
-img = cv2.imread("track/Sylvain/stage_Noham/stage_Noham/image_vide_pts.png")
+img = cv2.imread("track/Sylvain/stage_Noham/image_vide_pts.png")
 nh,nw,_ = img.shape
 ## img : b g r
 
@@ -72,10 +72,10 @@ for i,dd in enumerate(distances):
     pt2 = px_ground_pts[int(dd[1]),:]
     img_pts = cv2.line(img_pts, pt1, pt2, (255,255,0), 2)
 
-# cv2.imwrite("image_vide_pts_labels.png",img_pts)
-# cv2.imshow("pts", img_pts)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+cv2.imwrite("image_vide_pts_labels.png",img_pts)
+cv2.imshow("pts", img_pts)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 
 ## parametres caméra pour initialiser la minimisation de la "cost" fonction
