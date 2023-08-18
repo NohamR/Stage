@@ -12,7 +12,7 @@ framenb = 1
 
 keyvalues = []
 
-with open('traitementV2/distance.txt', 'r') as f:
+with open('distance.txt', 'r') as f:
     lignes = f.readlines()
     for ligne in lignes:
         line = eval(ligne)
@@ -34,7 +34,7 @@ for key, i in zip(keyvalues, range(1, len(keyvalues)+1)):
 print('keypositions: ', keypositions)
 colors = rainbow_gradient(len(keypositions)+1)
 
-with open('traitementV2/distance.txt', 'r') as f:
+with open('distance.txt', 'r') as f:
     lignes = f.readlines()
     for ligne in lignes:
         line = eval(ligne)
@@ -49,6 +49,11 @@ with open('traitementV2/distance.txt', 'r') as f:
         plt.xlim([-1,780])
         plt.ylim([-20, 150])
 
+        plt.xlabel("Numéro de l'image", fontsize = 16)
+        plt.ylabel("Distance au point d'origine", fontsize = 16)
+        plt.xticks(fontsize = 14)
+        plt.yticks(fontsize = 14)
+
         plt.grid()
 
         nb = 0
@@ -57,7 +62,7 @@ with open('traitementV2/distance.txt', 'r') as f:
             if key == 13:
                 # print('value: ', value)
                 # print(framenb)
-                with open("traitementV2/pt13.txt", 'a', encoding='utf-8') as file:
+                with open("pt4only.txt", 'a', encoding='utf-8') as file:
                     file.write('\n' + str(framenb) + ';' + str(value))
 
                 plt.plot([framenb],[value], marker='o', linestyle='-', color=colors[keypositions[key]])       # , color=colors[key]
@@ -67,6 +72,6 @@ with open('traitementV2/distance.txt', 'r') as f:
         # plt.draw()
         # plt.pause(0.0001)
         if framenb == 780:
-            plt.savefig(f'traitementV2/{framenb}.png')
-        framenb += 1
+            plt.savefig('position-temps-pt4.png')
+        framenb += 1 
         # plt.clf()

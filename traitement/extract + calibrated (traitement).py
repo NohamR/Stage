@@ -108,12 +108,12 @@ while cap.isOpened():
 
         BH = ((space_pts[:,0] - Xb) * Xv) + ((space_pts[:,1] - Yb) * Yv) / np.sqrt( (Xv**2) + (Yv ** 2) )
         # print(BH.tolist())
-        with open("traitement/distance.txt", 'a', encoding='utf-8') as file:
-                file.write('\n' + str(BH.tolist()))
+        # with open("traitement/distance.txt", 'a', encoding='utf-8') as file:
+        #         file.write('\n' + str(BH.tolist()))
 
-        # resized_frame = cv2.resize(frame, (display_width, display_height))
-        # cv2.imshow('Frame', resized_frame)
-        # plt.figure()
+        resized_frame = cv2.resize(frame, (display_width, display_height))
+        cv2.imshow('Frame', resized_frame)
+        plt.figure()
 
 #######################
         # plt.figure(1, figsize=[16, 9])

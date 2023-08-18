@@ -104,8 +104,8 @@ while cap.isOpened():
             tosave[key] = val
         print(tosave)
 
-        with open("traitementV2/distance.txt", 'a', encoding='utf-8') as file:
-                file.write('\n' + str(tosave))
+        # with open("traitementV2/distance.txt", 'a', encoding='utf-8') as file:
+        #         file.write('\n' + str(tosave))
 
         if cv2.waitKey(25) & 0xFF == ord('q'):break
         frame_nb = frame_nb + 1
